@@ -2,32 +2,17 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
-  "title": 123,
-  "details": null,
+  "title": "unite",
+  "details": "um evento incrivel",
   "maximumAttendees": 1
 }
 
 ###
 
-POST http://localhost:3333/events/81a3f6db-45bf-4a6f-b10c-bcaf8837ac43/attendees
+POST http://localhost:3333/events/1ecbf2d6-c0fd-4b42-8f0e-4bc068dabb6a/attendees
 Content-Type: application/json
 
 {
-  "name": "Diego Fernandes",
-  "email": "diego2@rocketseat.com.br"
+  "name": "kazuo4",
+  "email": "otaviokazuo4@hotmail.com"
 }
-
-###
-
-GET http://localhost:3333/events/81a3f6db-45bf-4a6f-b10c-bcaf8837ac43
-
-###
-
-GET http://localhost:3333/attendees/3/badge
-###
-
-GET http://localhost:3333/attendees/4/check-in
-
-###
-
-GET http://localhost:3333/events/81a3f6db-45bf-4a6f-b10c-bcaf8837ac43/attendees?query=diego
