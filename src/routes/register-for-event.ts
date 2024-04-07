@@ -2,6 +2,7 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import {z} from "zod";
 import { prisma } from "../lib/prisma";
+import { BadRequest } from "./_errors/bad-request";
 
 export async function registerForEvent(app:FastifyInstance) {
     app.withTypeProvider<ZodTypeProvider>()
@@ -20,7 +21,8 @@ export async function registerForEvent(app:FastifyInstance) {
                 })
             }
         }
-    }, async (request, reply) => {
+    }, 
+    async (request, reply) => {
         const {eventId} = request.params
         const {name, email} = request.body
 
@@ -37,20 +39,21 @@ export async function registerForEvent(app:FastifyInstance) {
             throw new Error("this e-mail is already exist!") // verifico se o email já existe em um evento
         }
 
-           const event = await prisma.event.findUnique({
+        const [event, amountOfAttendeesForEvent] = await Promise.all([
+            prisma.event.findUnique({
             where:{
                 id: eventId, // identifico o id do evento e guardo na variavel
             }
-        }) 
-
-        const amountOfAttendeesForEvent = await prisma.attendee.count({
-            where: {
-                eventId, // verifico a quantidade de participante que estão registrado em um evento
-            }
-        })
-
+        }) ,
+            prisma.attendee.count({
+                where: {
+                    eventId, // verifico a quantidade de participante que estão registrado em um evento
+                }
+            })
+        ])
+        
         if(event?.maximumAttendees && amountOfAttendeesForEvent >= event.maximumAttendees){
-            throw new Error("the maximum number of attendees for this event has been reached.") 
+            throw new BadRequest("the maximum number of attendees for this event has been reached.") 
             // caso tenha maximo de participante no evento e o numero de participante seja >= ao numero maximo do evento
         }
 
