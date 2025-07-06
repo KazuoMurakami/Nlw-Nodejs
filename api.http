@@ -2,13 +2,20 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
   "title": "unite",
   "details": "um evento incrivel",
   "maximumAttendees": 1
+=======
+  "title": "evento incrivel 2",
+  "details": "um evento incrivel",
+  "maximumAttendees": 100
+>>>>>>> f83a3518da26f2a3c5b975263e3046fec5154f82
 }
 
 ###
 
+<<<<<<< HEAD
 POST http://localhost:3333/events/1ecbf2d6-c0fd-4b42-8f0e-4bc068dabb6a/attendees
 Content-Type: application/json
 
@@ -16,3 +23,29 @@ Content-Type: application/json
   "name": "kazuo4",
   "email": "otaviokazuo4@hotmail.com"
 }
+=======
+POST http://localhost:3333/events/e4caa733-4e12-432b-bcbc-9a1c7f429ba3/attendees
+Content-Type: application/json
+
+{
+  "name": "kazuo232",
+  "email": "otave5432434r7@hotmail.com"
+}
+
+
+###
+
+GET http://localhost:3333/events/e4caa733-4e12-432b-bcbc-9a1c7f429ba3
+
+###
+
+GET http://localhost:3333/attendees/18/badge
+
+
+###
+
+GET http://localhost:3333/attendees/19/check-in
+###
+
+GET http://localhost:3333/events/e4caa733-4e12-432b-bcbc-9a1c7f429ba3/attendees?query=kazuo4
+>>>>>>> f83a3518da26f2a3c5b975263e3046fec5154f82
